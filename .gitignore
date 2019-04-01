@@ -30,6 +30,8 @@ bld/
 #wwwroot/
 # Visual Studio Code
 .vscode/
+# nodejs
+node_modules
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
