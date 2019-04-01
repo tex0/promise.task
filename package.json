@@ -1,0 +1,31 @@
+{
+  "name": "promise.task",
+  "version": "1.0.0",
+  "description": "mechanism for performing tasks using 'worker_thread' or 'child_process'",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "promise-timeout": "^1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node ./tests/debugTest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tex0/promise.task.git"
+  },
+  "keywords": [
+    "worker_tread",
+    "process",
+    "parallel tasks"
+  ],
+  "author": "tex0",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tex0/promise.task/issues"
+  },
+  "homepage": "https://github.com/tex0/promise.task#readme"
+}
