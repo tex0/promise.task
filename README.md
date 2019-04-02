@@ -16,7 +16,7 @@ Promise = require('promise.task')(Promise);
 ```javascript 
 let task = Promise.task(absoluteModulePath, entryPoint, options) 
 ```
-The Promise.task () function returns a task object for its subsequent execution. Parameters:
+The Promise.task() function returns a task object for its subsequent execution. Parameters:
 * `absoluteModulePath` - absolute path to module for loading in parallel context with function for parallel execution.
 * `entryPoint` - name of module function for running. If this parameter is empty string or is not defined, the module object will be calling as a function
 * `options`:
