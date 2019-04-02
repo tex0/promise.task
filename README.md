@@ -34,7 +34,7 @@ Executing a task as a specified function of a target module in a parallel contex
 task.abort(abortCallback)
 ```
 Force stopping execution task. Will be generated error after this call (catch this error). Parameters:
-* `abortCallback` - callback from abort task.
+* `abortCallback` - callback from abort.
 
 ```javascript
 task.onNotification(notificationCallback)
