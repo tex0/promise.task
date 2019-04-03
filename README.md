@@ -28,7 +28,7 @@ The Promise.task() function returns a task object for its subsequent execution. 
 task.run(arg1, arg2,...)
 ```
 Executing a task as a specified function of a target module in a parallel context. Parameters:
-* `arg1, arg2,...` - arguments runned function of module loaded in parallel context
+* `arg1, arg2,...` - arguments of runned function of module loaded in parallel context
 
 ```javascript
 task.abort(abortCallback)
