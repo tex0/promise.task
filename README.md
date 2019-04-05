@@ -10,39 +10,42 @@ Promise = require('promise.task')(Promise);
 ```javascript 
 let task = Promise.task(absoluteModulePath, entryPoint, options) 
 ```
-The Promise.task() function returns a task object for its subsequent execution. Parameters:
-* `absoluteModulePath` - absolute path to module for loading in parallel context with function for parallel execution.
-* `entryPoint` - name of module function for running. If this parameter is empty string or is not defined, the module object will be calling as a function
+The `Promise.task()` function returns a task object for its subsequent execution. Parameters:
+* `absoluteModulePath` - *absolute path to module for loading in parallel context with function for parallel execution.*
+* `entryPoint` - *name of module function for running. If this parameter is empty string or is not defined, the module object will be calling as a function*
 * `options`:
-    * `timeout` - timeout executable function in loaded module
-    * `inProcess` - if this parameter is true, the target task parallel context will be a child process. Default - runing in worker thread
+    * `timeout` - *timeout executable function in loaded module*
+    * `inProcess` - *if this parameter is true, the target task parallel context will be a child process. Default - runing in worker thread*
+
+<br/>
     
 ### Task object members:
 ```javascript
 task.run(arg1, arg2,...)
 ```
 Executing a task as a specified function of a target module in a parallel context. Parameters:
-* `arg1, arg2,...` - arguments of runned function of module loaded in parallel context
-
+* `arg1, arg2,...` - *arguments of running function of module loaded in parallel context*
+<br/>  
 ```javascript
 task.abort(abortCallback)
 ```
 Force stopping execution task. Will be generated error after this call (catch this error). Parameters:
-* `abortCallback` - callback from abort.
+* `abortCallback` - *callback from abort. Function prototype: `function(err, errCode) {/* handler code */}`*
+
+<br/>
 
 ```javascript
 task.onNotification(notificationCallback)
 ```
 Subscribe to notification from executing function in parallel context. Returns current task object. Parameters:
-* `notificationCallback` - callback for handle notification. Function prototype:
+* `notificationCallback` - *callback for handle notification. Function prototype:*
 ```javascript
 function(notificationInfo){
     // handler code
 }
 ```
 
-
-# Examples
+# Examples:
 
 ### testModule.js:
 ```javascript
@@ -101,5 +104,5 @@ function notificationHandler(notificationInfo) {
     console.log(notificationInfo); // object {message: hello}
 }
 ```
-* You can may set a setting 'timeout' for the task being running with timeout and if the task has not yet been completed after timeout expires you will get a thrown exception 'TimeoutError' (from package 'promise-timeout')
+* You can may set a setting 'timeout' for the task being running with timeout and if the task has not yet been completed after timeout expires you will get a thrown exception 'TimeoutError' (from package [promise-timeout](https://github.com/building5/promise-timeout))
 * If any error occurs during the execution of a parallel task, an this error will be generated in the running context that you can catch  by wrapping the task running code in try/catch blocks (or use .catch() function, if you use Promise without 'async/await' syntactic sugar)

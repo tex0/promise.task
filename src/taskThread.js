@@ -46,9 +46,8 @@ TaskThread.prototype.abort = function(errCallback) {
         return new Promise((resolve, reject) => {
             try {
                 if (this._worker != null) {
-                    let lThreadId = this._worker.threadId;
                     this._worker.terminate((err, errCode) => {
-                        let error = new Error(`Thread Id=${lThreadId} aborted.`);
+                        let error = new Error(`Thread Id=${this._threadId} aborted.`);
                         error.baseError = err;
                         error.code = errCode;
                         this._eventEmitter.removeAllListeners('notification');
