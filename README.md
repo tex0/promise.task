@@ -1,12 +1,6 @@
 # promise.task
 Wrapper for execution tasks in parallel context using 'worker_thread' or 'child_process'
 
-## Installation
-
-```bash
-npm install promise.task
-```
-
 ## Usage
 ```javascript
 Promise = require('promise.task')(Promise);
