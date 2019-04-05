@@ -25,7 +25,9 @@ task.run(arg1, arg2,...)
 ```
 Executing a task as a specified function of a target module in a parallel context. Parameters:
 * `arg1, arg2,...` - *arguments of running function of module loaded in parallel context*
+
 <br/>  
+
 ```javascript
 task.abort(abortCallback)
 ```
