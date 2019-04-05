@@ -62,7 +62,8 @@ module.exports.echo = (echoMessage) => {
 module.exports.echoAsync = (echoMessage) => {
     return Promise.resolve(echoMessage);
 }
-// if you want to use notifications, your executable function must contain the first argument as notificator object with the "notify" method called to trigger the notification.
+// if you want to use notifications, your executable function must contain the first argument as notificator object 
+// with the "notify" method called to trigger the notification.
 module.exports.notification = function(notificator) {
    return new Promise((resolve, reject) => {
       if (notificator)
