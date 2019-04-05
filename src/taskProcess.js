@@ -1,8 +1,7 @@
 'use strict'
-const path = require('path');
-const {timeout, TimeoutError} = require('promise-timeout');
-const EventEmitter  = require('events');
-const childProcess = require('child_process');
+const { timeout, TimeoutError } = require('promise-timeout');
+const { childProcess } = require('child_process');
+const { EventEmitter }  = require('events');
 
 function TaskProcess(absoluteModulePath, entryPoint, options) {
     const absoluteModulePath_ = absoluteModulePath;
@@ -15,22 +14,24 @@ function TaskProcess(absoluteModulePath, entryPoint, options) {
 
     this._notificationCallback = null;
 
-    this.__getAbsoluteModulePath = function() {
+    this.__getAbsoluteModulePath = () => {
         return absoluteModulePath_;
     }
-    this.__getEntryPoint = function() {
+    this.__getEntryPoint = () => {
         return entryPoint_;
     }
-    this.__getTimeout = function() {
+    this.__getTimeout = () => {
         return timeout_;
     }
+
+    this.processId;
 }
 
 TaskProcess.prototype = {
     get AbsoluteModulePath() { return this.__getAbsoluteModulePath(); },
     get EntryPoint() { return this.__getEntryPoint(); },
     get Timeout() { return this.__getTimeout(); },
-    get Id() { return this._worker.pid; }
+    get Id() { return this.processId; }
 
 }
 
@@ -45,10 +46,9 @@ TaskProcess.prototype.abort = function(errCallback) {
         return new Promise((resolve, reject) => {
             try {
                 if (this._worker != null) {
-                    let workerId = this._worker.pid;
                     this._worker.kill('SIGINT');
                     this._eventEmitter.removeAllListeners('notification');
-                    resolve(new Error(`Process with pid=${workerId} aborted.`));
+                    resolve(new Error(`Process with pid=${this.processId} aborted.`));
                 }
                 else resolve(); 
             } catch (e) {
@@ -58,8 +58,7 @@ TaskProcess.prototype.abort = function(errCallback) {
     } else {
         if (this._worker != null)
             this._worker.kill();
-        let workerId = this._worker.pid;
-        errCallback(new Error(`Process with pid=${workerId} aborted.`), 0);
+        errCallback(new Error(`Process with pid=${this.processId} aborted.`), 0);
     }
 }
 
@@ -69,6 +68,7 @@ TaskProcess.prototype.run = function() {
         try {
             let workerPath = require.resolve('./workerProcessScript.js');
             this._worker = childProcess.fork(workerPath, args);
+            this.processId = this._worker.pid;
             this._worker.on('message', (result) => {
                 if (result.error || result.data) {
                     this._eventEmitter.removeAllListeners('notification');

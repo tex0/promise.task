@@ -12,7 +12,7 @@ Notificator.prototype.notify = function(notificationInfo) {
     this.__getParentPort().postMessage({notification: notificationInfo});
 }
 
-async function Run() {
+(async function Run() {
     if (!workerData || !workerData.args) {
         let error_stack = new Error().stack;
         let error_message = 'Execute worker error: invalid worker data';
@@ -37,6 +37,4 @@ async function Run() {
             parentPort.postMessage({ error: { errorMessage: message, errorStack: stack } } );
         }
     }
-}
-
-Run();
+})();

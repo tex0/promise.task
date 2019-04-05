@@ -1,8 +1,7 @@
 'use strict'
-const path = require('path');
+const { timeout, TimeoutError } = require('promise-timeout');
 const { Worker } = require('worker_threads');
-const {timeout, TimeoutError} = require('promise-timeout');
-const EventEmitter  = require('events');
+const { EventEmitter }  = require('events');
 
 function TaskThread(absoluteModulePath, entryPoint, options) {
     const absoluteModulePath_ = absoluteModulePath;
@@ -15,13 +14,13 @@ function TaskThread(absoluteModulePath, entryPoint, options) {
 
     this._notificationCallback = null;
 
-    this.__getAbsoluteModulePath = function() {
+    this.__getAbsoluteModulePath = () => {
         return absoluteModulePath_;
     }
-    this.__getEntryPoint = function() {
+    this.__getEntryPoint = () => {
         return entryPoint_;
     }
-    this.__getTimeout = function() {
+    this.__getTimeout = () => {
         return timeout_;
     }
 
