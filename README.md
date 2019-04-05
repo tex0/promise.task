@@ -59,8 +59,11 @@ module.exports.echoAsync = (echoMessage) => {
 }
 // if you want to use notifications, your executable function must contain the first argument as notificator object with the "notify" method called to trigger the notification.
 module.exports.notification = function(notificator) {
-    if (notificator)
-        notificator.notify({message: 'Hello!'});
+   return new Promise((resolve, reject) => {
+      if (notificator)
+         notificator.notify({message: 'Hello!'});
+      else reject(new Error('notificator is not defined'));
+   });
 }
 ```
 ### using testModule functions as parallel tasks:
