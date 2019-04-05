@@ -67,6 +67,7 @@ module.exports.notification = function(notificator) {
 ```javascript
 try {
     let taskResult = await Promise.task(require.resolve('./testsModule'), 'echo').run('[TEST MESSAGE]');
+    console.log(taskResult); // write [TEST MESSAGE] in console
 }
 catch(e) {
     console.log(e);
@@ -77,6 +78,7 @@ catch(e) {
 
 try {
     let taskResult = await Promise.task(require.resolve('./testsModule'), 'echoAsync', {inProcess: true}).run('[TEST MESSAGE]');
+    console.log(taskResult); // write [TEST MESSAGE] in console
 }
 catch(e) {
     console.log(e);
@@ -86,7 +88,7 @@ catch(e) {
 // Use notification
 try {
     let task = Promise.task(require.resolve('./testsModule'), 'notification');
-    let taskResult = await task.onNotification(notificationHandler).run('[TEST MESSAGE]');
+    let taskResult = await task.onNotification(notificationHandler).run();
 }
 catch(e) {
     console.log(e);
