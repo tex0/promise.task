@@ -1,7 +1,7 @@
 {
   "name": "promise.task",
   "version": "1.0.0",
-  "description": "mechanism for performing tasks using 'worker_thread' or 'child_process'",
+  "description": "Wrapper for execution tasks in parallel context using 'worker_thread' or 'child_process'",
   "main": "index.js",
   "directories": {
     "test": "tests"
