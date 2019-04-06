@@ -1,7 +1,7 @@
 'use strict'
 const { timeout, TimeoutError } = require('promise-timeout');
 const { Worker } = require('worker_threads');
-const { EventEmitter }  = require('events');
+const EventEmitter  = require('events');
 
 function TaskThread(absoluteModulePath, entryPoint, options) {
     const absoluteModulePath_ = absoluteModulePath;

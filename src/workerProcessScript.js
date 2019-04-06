@@ -4,7 +4,7 @@ const process = require('process');
 function Notificator(processPort) {
     const _processPort = processPort;
 
-    this.__getProcessPort = function() {
+    this.__getProcessPort = () => {
         return _processPort;
     }
 }
@@ -12,7 +12,7 @@ Notificator.prototype.notify = function(notificationInfo) {
     this.__getProcessPort().send({notification: notificationInfo});
 }
 
-(async function Run() {
+async function Run() {
     let modulePath = process.argv[2];
     let entryPoint = process.argv[3];
     let canNotify = process.argv[4] == 'true';
@@ -45,4 +45,6 @@ Notificator.prototype.notify = function(notificationInfo) {
             process.send({ error: { errorMessage: message, errorStack: stack } } );
         }
     }
-})();
+};
+
+Run();

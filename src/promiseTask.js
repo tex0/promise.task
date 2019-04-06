@@ -1,6 +1,6 @@
 'use strict'
-const { taskProcess } = require('./taskProcess');
-const { taskThread } = require('./taskThread');
+const taskProcess = require('./taskProcess');
+const taskThread = require('./taskThread');
 
 function Task(absoluteModulePath, entryPoint, options) {
     const absoluteModulePath_ = absoluteModulePath;

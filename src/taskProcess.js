@@ -1,7 +1,7 @@
 'use strict'
 const { timeout, TimeoutError } = require('promise-timeout');
-const { childProcess } = require('child_process');
-const { EventEmitter }  = require('events');
+const childProcess = require('child_process');
+const EventEmitter  = require('events');
 
 function TaskProcess(absoluteModulePath, entryPoint, options) {
     const absoluteModulePath_ = absoluteModulePath;
