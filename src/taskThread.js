@@ -6,6 +6,7 @@ const { EventEmitter }  = require('events');
 function TaskThread(absoluteModulePath, entryPoint, options) {
     const absoluteModulePath_ = absoluteModulePath;
     const entryPoint_ = entryPoint;
+    const options_ = options;
     const timeout_ = options ? options.timeout : undefined;
 
     this._worker = null;
@@ -23,6 +24,9 @@ function TaskThread(absoluteModulePath, entryPoint, options) {
     this.__getTimeout = () => {
         return timeout_;
     }
+    this.__getOptions = () => {
+        return options_;
+    }
 
     this._threadId;
 }
@@ -31,6 +35,7 @@ TaskThread.prototype = {
     get AbsoluteModulePath() { return this.__getAbsoluteModulePath(); },
     get EntryPoint() { return this.__getEntryPoint(); },
     get Timeout() { return this.__getTimeout(); },
+    get Options() { return this.__getOptions(); },
     get Id() { return this._threadId; }
 }
 

@@ -6,6 +6,7 @@ const { EventEmitter }  = require('events');
 function TaskProcess(absoluteModulePath, entryPoint, options) {
     const absoluteModulePath_ = absoluteModulePath;
     const entryPoint_ = entryPoint;
+    const options_ = options;
     const timeout_ = options ? options.timeout : undefined;
 
     this._worker = null;
@@ -23,15 +24,19 @@ function TaskProcess(absoluteModulePath, entryPoint, options) {
     this.__getTimeout = () => {
         return timeout_;
     }
+    this.__getOptions = () => {
+        return options_;
+    }
 
-    this.processId;
+    this._processId;
 }
 
 TaskProcess.prototype = {
     get AbsoluteModulePath() { return this.__getAbsoluteModulePath(); },
     get EntryPoint() { return this.__getEntryPoint(); },
     get Timeout() { return this.__getTimeout(); },
-    get Id() { return this.processId; }
+    get Options() { return this.__getOptions(); },
+    get Id() { return this._processId; }
 
 }
 
@@ -48,7 +53,7 @@ TaskProcess.prototype.abort = function(errCallback) {
                 if (this._worker != null) {
                     this._worker.kill('SIGINT');
                     this._eventEmitter.removeAllListeners('notification');
-                    resolve(new Error(`Process with pid=${this.processId} aborted.`));
+                    resolve(new Error(`Process with pid=${this._processId} aborted.`));
                 }
                 else resolve(); 
             } catch (e) {
@@ -58,7 +63,7 @@ TaskProcess.prototype.abort = function(errCallback) {
     } else {
         if (this._worker != null)
             this._worker.kill();
-        errCallback(new Error(`Process with pid=${this.processId} aborted.`), 0);
+        errCallback(new Error(`Process with pid=${this._processId} aborted.`), 0);
     }
 }
 
@@ -68,7 +73,7 @@ TaskProcess.prototype.run = function() {
         try {
             let workerPath = require.resolve('./workerProcessScript.js');
             this._worker = childProcess.fork(workerPath, args);
-            this.processId = this._worker.pid;
+            this._processId = this._worker.pid;
             this._worker.on('message', (result) => {
                 if (result.error || result.data) {
                     this._eventEmitter.removeAllListeners('notification');

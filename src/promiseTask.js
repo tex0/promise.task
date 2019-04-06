@@ -5,7 +5,7 @@ const { taskThread } = require('./taskThread');
 function Task(absoluteModulePath, entryPoint, options) {
     const absoluteModulePath_ = absoluteModulePath;
     const entryPoint_ = entryPoint;
-    const timeout_ = options ? options.timeout : undefined;
+    const options_ = options;
 
     this._worker = options && options.inProcess ? 
                                 new taskProcess(absoluteModulePath, entryPoint, options) : 
@@ -19,19 +19,18 @@ function Task(absoluteModulePath, entryPoint, options) {
     this.__getEntryPoint = () => {
         return entryPoint_;
     }
-    this.__getTimeout = () => {
-        return timeout_;
-    }
-
     this.__getInProcessFlag = () => {
         return options && !!options.inProcess;
+    }
+    this.__getOptions = () => {
+        return options_;
     }
 }
 
 Task.prototype = {
     get AbsoluteModulePath() { return this.__getAbsoluteModulePath(); },
     get EntryPoint() { return this.__getEntryPoint(); },
-    get Timeout() { return this.__getTimeout(); },
+    get Options() { return this.__getOptions(); },
     get TaskId() { return this._worker.Id; },
     get InProcess() { return this.__getInProcessFlag(); }
 }

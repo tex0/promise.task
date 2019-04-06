@@ -23,7 +23,9 @@ The `Promise.task()` function returns a task object for its subsequent execution
 ```javascript
 task.run(arg1, arg2,...)
 ```
-Executing a task as a specified function of a target module in a parallel context. Parameters:
+Executing a task as a specified function of a target module in a parallel context. Returns 'Promise'
+<br/>
+Parameters:
 * `arg1, arg2,...` - *arguments of running function of module loaded in parallel context*
 
 <br/>  
@@ -39,7 +41,9 @@ Force stopping execution task. Will be generated error after this call (catch th
 ```javascript
 task.onNotification(notificationCallback)
 ```
-Subscribe to notification from executing function in parallel context. Returns current task object. Parameters:
+Subscribe to notification from executing function in parallel context. Returns current task object. Returns current task. 
+<br/>
+Parameters:
 * `notificationCallback` - *callback for handle notification. Function prototype:*
 ```javascript
 function(notificationInfo){
