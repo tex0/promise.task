@@ -108,7 +108,7 @@ catch(e) {
 }
 
 function notificationHandler(notificationInfo) {
-    console.log(notificationInfo); // object {message: hello}
+    console.log(notificationInfo); // object {message: 'Hello!'}
 }
 ```
 * You can may set a setting 'timeout' for the task being running with timeout and if the task has not yet been completed after timeout expires you will get a thrown exception 'TimeoutError' (from package [promise-timeout](https://github.com/building5/promise-timeout))
